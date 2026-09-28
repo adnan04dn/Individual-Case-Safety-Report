@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Individual Case Safety Report</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f7fb;
+    color:#172033;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:18px;
+}
+
+header{
+    background:#173f7a;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:18px;
+}
+
+section{
+    background:white;
+    padding:20px;
+    margin:16px 0;
+    border-radius:14px;
+    box-shadow:0 3px 12px #0001;
+}
+
+h1,h2{
+    margin-top:0;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:14px 0;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:11px;
+    margin-top:6px;
+    border:1px solid #bbb;
+    border-radius:8px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:80px;
+}
+
+button{
+    background:#173f7a;
+    color:white;
+    border:0;
+    padding:13px 20px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+button:hover{
+    background:#0f2d58;
+}
+
+.result{
+    background:#eef4ff;
+    padding:18px;
+    margin-top:18px;
+    border-radius:10px;
+}
+
+.row{
+    padding:9px;
+    border-bottom:1px solid #ccd5e5;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    background:#dce8ff;
+    font-weight:bold;
+}
+
+.note{
+    background:#fff8df;
+    padding:12px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.hidden{
+    display:none;
+}
+
+@media print{
+    header{
+        background:white;
+        color:black;
+        border:1px solid #aaa;
+    }
+
+    button{
+        display:none;
+    }
+
+    body{
+        background:white;
+    }
+
+    section{
+        box-shadow:none;
+        border:1px solid #ddd;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>Individual Case Safety Report (ICSR)</h1>
+<p>Complete Pharmacovigilance Assessment & Drug Safety Associate Simulation</p>
+</header>
+
+
+<section>
+
+<h2>1. Patient Information</h2>
+
+<label>
+Patient ID
+<input id="patient" placeholder="ICSR-001">
+</label>
+
+<label>
+Age
+<input id="age" type="number" placeholder="32">
+</label>
+
+<label>
+Sex
+<select id="sex">
+<option value="">Select</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+<option>Unknown</option>
+</select>
+</label>
+
+<label>
+Relevant Medical History
+<textarea id="history"
+placeholder="Example: No significant medical history"></textarea>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>2. Suspected Adverse Drug Reaction</h2>
+
+<label>
+ADR / Event Description
+<textarea id="reaction"
+placeholder="Example: Generalized skin rash and itching"></textarea>
+</label>
+
+<label>
+Date of ADR Onset
+<input id="onset" type="date">
+</label>
+
+<label>
+ADR Outcome
+<select id="outcome">
+<option value="">Select</option>
+<option>Recovered</option>
+<option>Recovering</option>
+<option>Not recovered</option>
+<option>Fatal</option>
+<option>Unknown</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>3. Suspected Drug Information</h2>
+
+<label>
+Drug Name
+<input id="drug" placeholder="Amoxicillin">
+</label>
+
+<label>
+Indication
+<input id="indication"
+placeholder="Bacterial respiratory infection">
+</label>
+
+<label>
+Dose
+<input id="dose" placeholder="500 mg">
+</label>
+
+<label>
+Route
+<select id="route">
+<option value="">Select</option>
+<option>Oral</option>
+<option>Intravenous</option>
+<option>Intramuscular</option>
+<option>Subcutaneous</option>
+<option>Other</option>
+</select>
+</label>
+
+<label>
+Frequency
+<input id="frequency" placeholder="Three times daily">
+</label>
+
+<label>
+Therapy Start Date
+<input id="start" type="date">
+</label>
+
+<label>
+Therapy Stop Date
+<input id="stop" type="date">
+</label>
+
+</section>
+
+
+<section>
+
+<h2>4. Concomitant Medication</h2>
+
+<label>
+Other Medication(s)
+<textarea id="conmed"
+placeholder="Enter other medicines or write None"></textarea>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>5. Dechallenge / Rechallenge</h2>
+
+<label>
+Was the suspected drug withdrawn?
+<select id="dechallenge">
+<option value="">Select</option>
+<option>Yes</option>
+<option>No</option>
+<option>Unknown</option>
+</select>
+</label>
+
+<label>
+Result after withdrawal
+<select id="dechallengeResult">
+<option value="">Select</option>
+<option>Improved</option>
+<option>No improvement</option>
+<option>Unknown</option>
+<option>Not applicable</option>
+</select>
+</label>
+
+<label>
+Was the drug rechallenged?
+<select id="rechallenge">
+<option value="">Select</option>
+<option>Yes</option>
+<option>No</option>
+<option>Unknown</option>
+</select>
+</label>
+
+<label>
+Rechallenge Result
+<select id="rechallengeResult">
+<option value="">Select</option>
+<option>Reaction recurred</option>
+<option>Reaction did not recur</option>
+<option>Unknown</option>
+<option>Not applicable</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>6. Seriousness Assessment</h2>
+
+<p class="note">
+Select all applicable criteria. A serious case may involve death,
+life-threatening condition, hospitalization, significant disability,
+congenital anomaly, or another medically important event.
+</p>
+
+<label>
+Death?
+<select id="death">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+<label>
+Life-threatening?
+<select id="life">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+<label>
+Hospitalization required/prolonged?
+<select id="hospital">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+<label>
+Significant disability/incapacity?
+<select id="disability">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+<label>
+Congenital anomaly/birth defect?
+<select id="congenital">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+<label>
+Other medically important event?
+<select id="important">
+<option>No</option>
+<option>Yes</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>7. Severity Assessment</h2>
+
+<label>
+Severity
+<select id="severity">
+<option value="">Select</option>
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>8. Expectedness Assessment</h2>
+
+<p class="note">
+Expectedness should be determined by comparing the event with the
+applicable approved product information or reference safety information.
+</p>
+
+<label>
+Is the ADR listed in applicable product information?
+<select id="expected">
+<option value="">Select</option>
+<option>Yes</option>
+<option>No</option>
+<option>Unknown</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>9. Causality Assessment</h2>
+
+<label>
+Temporal relationship between drug and ADR
+<select id="temporal">
+<option value="">Select</option>
+<option>Compatible</option>
+<option>Not compatible</option>
+<option>Unknown</option>
+</select>
+</label>
+
+<label>
+Alternative causes adequately explain the event?
+<select id="alternative">
+<option value="">Select</option>
+<option>No</option>
+<option>Yes</option>
+<option>Unknown</option>
+</select>
+</label>
+
+<label>
+Response to drug withdrawal
+<select id="withdrawal">
+<option value="">Select</option>
+<option>Positive</option>
+<option>Negative</option>
+<option>Unknown</option>
+<option>Not applicable</option>
+</select>
+</label>
+
+<label>
+Response to rechallenge
+<select id="rechallengeEvidence">
+<option value="">Select</option>
+<option>Positive</option>
+<option>Negative</option>
+<option>Unknown</option>
+<option>Not performed</option>
+</select>
+</label>
+
+</section>
+
+
+<section>
+
+<h2>10. Reporter Information</h2>
+
+<label>
+Reporter Name
+<input id="reporter" placeholder="Drug Safety Associate">
+</label>
+
+<label>
+Profession
+<input id="profession" placeholder="Pharmacist">
+</label>
+
+<label>
+Organization
+<input id="organization">
+</label>
+
+<label>
+Email
+<input id="email" type="email">
+</label>
+
+</section>
+
+
+<section>
+
+<h2>11. Generate ICSR Assessment</h2>
+
+<button onclick="generateReport()">
+Generate ICSR Report
+</button>
+
+<div id="result" class="result hidden"></div>
+
+<br>
+
+<button id="printBtn"
+class="hidden"
+onclick="window.print()">
+Print / Save as PDF
+</button>
+
+</section>
+
+</div>
+
+
+<script>
+
+function val(id){
+    return document.getElementById(id).value.trim();
+}
+
+function esc(text){
+    return String(text).replace(/[&<>"]/g,function(c){
+        return {
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;'
+        }[c];
+    });
+}
+
+
+function generateReport(){
+
+    let required=[
+        ["patient","Patient ID"],
+        ["age","Age"],
+        ["sex","Sex"],
+        ["reaction","ADR / Event Description"],
+        ["onset","ADR Onset Date"],
+        ["outcome","ADR Outcome"],
+        ["drug","Drug Name"],
+        ["dose","Dose"],
+        ["route","Route"],
+        ["start","Therapy Start Date"],
+        ["dechallenge","Drug Withdrawal"],
+        ["severity","Severity"],
+        ["expected","Expectedness"],
+        ["temporal","Temporal Relationship"],
+        ["alternative","Alternative Causes"],
+        ["withdrawal","Withdrawal Response"]
+    ];
+
+    for(let item of required){
+
+        if(!val(item[0])){
+
+            alert("Please complete: " + item[1]);
+
+            document.getElementById(item[0]).focus();
+
+            return;
+        }
+    }
+
+
+    /* SERIOUSNESS */
+
+    let serious="Non-serious";
+
+    if(
+        val("death")==="Yes" ||
+        val("life")==="Yes" ||
+        val("hospital")==="Yes" ||
+        val("disability")==="Yes" ||
+        val("congenital")==="Yes" ||
+        val("important")==="Yes"
+    ){
+        serious="Serious";
+    }
+
+
+    /* EXPECTEDNESS */
+
+    let expectedText="Unknown";
+
+    if(val("expected")==="Yes"){
+        expectedText="Expected";
+    }
+
+    if(val("expected")==="No"){
+        expectedText="Unexpected";
+    }
+
+
+    /* CAUSALITY */
+
+    let causality="Unassessable / Unknown";
+
+    let temporal=val("temporal");
+    let alternative=val("alternative");
+    let withdrawal=val("withdrawal");
+    let rechallenge=val("rechallengeEvidence");
+
+
+    if(
+        temporal==="Compatible" &&
+        alternative==="No" &&
+        withdrawal==="Positive"
+    ){
+        causality="Probable / Likely";
+    }
+
+    if(
+        temporal==="Compatible" &&
+        alternative==="No" &&
+        withdrawal==="Positive" &&
+        rechallenge==="Positive"
+    ){
+        causality="Certain / Very likely";
+    }
+
+    if(
+        temporal==="Compatible" &&
+        alternative==="Yes"
+    ){
+        causality="Possible";
+    }
+
+    if(
+        temporal==="Not compatible"
+    ){
+        causality="Unlikely";
+    }
+
+
+    /* CLINICAL IMPACT */
+
+    let impact="Low";
+
+    if(val("severity")==="Moderate"){
+        impact="Moderate";
+    }
+
+    if(
+        val("severity")==="Severe" ||
+        serious==="Serious"
+    ){
+        impact="High";
+    }
+
+
+    /* OVERALL CLASSIFICATION */
+
+    let classification=
+        serious + " ADR; " +
+        val("severity") + " severity; " +
+        expectedText + "; " +
+        causality + " causality";
+
+
+    let html="";
+
+    html += "<h2>ICSR Assessment Result</h2>";
+
+    html += "<div class='row'><b>Patient ID:</b> "
+        + esc(val("patient")) + "</div>";
+
+    html += "<div class='row'><b>Age:</b> "
+        + esc(val("age")) + "</div>";
+
+    html += "<div class='row'><b>Sex:</b> "
+        + esc(val("sex")) + "</div>";
+
+    html += "<div class='row'><b>ADR:</b> "
+        + esc(val("reaction")) + "</div>";
+
+    html += "<div class='row'><b>Suspected Drug:</b> "
+        + esc(val("drug")) + "</div>";
+
+    html += "<div class='row'><b>Indication:</b> "
+        + esc(val("indication") || "Not reported") + "</div>";
+
+    html += "<div class='row'><b>Seriousness:</b> "
+        + "<span class='badge'>" + serious + "</span></div>";
+
+    html += "<div class='row'><b>Severity:</b> "
+        + "<span class='badge'>" + esc(val("severity")) + "</span></div>";
+
+    html += "<div class='row'><b>Expectedness:</b> "
+        + "<span class='badge'>" + expectedText + "</span></div>";
+
+    html += "<div class='row'><b>Causality:</b> "
+        + "<span class='badge'>" + causality + "</span></div>";
+
+    html += "<div class='row'><b>Clinical Impact:</b> "
+        + "<span class='badge'>" + impact + "</span></div>";
+
+    html += "<div class='row'><b>Outcome:</b> "
+        + esc(val("outcome")) + "</div>";
+
+    html += "<div class='row'><b>Dechallenge:</b> "
+        + esc(val("dechallengeResult")) + "</div>";
+
+    html += "<div class='row'><b>Rechallenge:</b> "
+        + esc(val("rechallengeResult")) + "</div>";
+
+    html += "<div class='row'><b>Concomitant Medication:</b> "
+        + esc(val("conmed") || "None reported") + "</div>";
+
+    html += "<div class='row'><b>Reporter:</b> "
+        + esc(val("reporter") || "Not reported") + "</div>";
+
+    html += "<div class='row'><b>Profession:</b> "
+        + esc(val("profession") || "Not reported") + "</div>";
+
+    html += "<h3>Drug Safety Associate Assessment</h3>";
+
+    html += "<p>";
+
+    if(causality==="Probable / Likely"){
+        html += "The temporal relationship is compatible with a drug-related reaction, no adequate alternative cause was selected, and the positive withdrawal response supports a probable/likely causal association.";
+    }
+    else if(causality==="Certain / Very likely"){
+        html += "The temporal relationship, absence of an adequate alternative cause, positive dechallenge and positive rechallenge provide strong support for a causal association.";
+    }
+    else if(causality==="Possible"){
+        html += "A temporal relationship is present, but an alternative cause was also identified; therefore the association is classified as possible.";
+    }
+    else if(causality==="Unlikely"){
+        html += "The reported timing is not compatible with the suspected drug according to the information entered.";
+    }
+    else{
+        html += "The available information is insufficient to establish a stronger causal relationship.";
+    }
+
+    html += "</p>";
+
+    html += "<p><b>Final ICSR Classification:</b> "
+        + esc(classification) + "</p>";
+
+    html += "<p class='note'><b>Important:</b> This is an educational simulation. "
+        + "Real-world ICSR processing requires verification of the source case, "
+        + "applicable product information, seriousness criteria, coding, duplicate "
+        + "search, medical review and applicable pharmacovigilance procedures.</p>";
+
+
+    document.getElementById("result").innerHTML=html;
+
+    document.getElementById("result").classList.remove("hidden");
+
+    document.getElementById("printBtn").classList.remove("hidden");
+
+    document.getElementById("result").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
